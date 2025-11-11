@@ -7,12 +7,11 @@ export default defineConfig({
     include: ['chroma-js'],
     exclude: [
       '@finos/perspective',
-      '@finos/perspective-viewer',
-      '@finos/perspective-viewer-d3fc',
-      '@finos/perspective-viewer-datagrid',
+      '@finos/perspective-viewer'
     ],
     esbuildOptions: {
-      target: 'esnext'
+      target: 'esnext',
+      external: ['@finos/perspective', '@finos/perspective-viewer']
     }
   },
   assetsInclude: ['**/*.wasm'],
