@@ -1,0 +1,2 @@
+Pivot Chart Tool — MVP PRD (Dev Handoff)
+See README for structure. Key modules: utils/duckdb.ts, utils/perspective.ts, state/store.ts, components/*.

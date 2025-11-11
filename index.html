@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pivot Chart Tool</title>
+    <style>
+      :root { --bg:#0b0f14; --fg:#e9eef5; --muted:#97a3b6; --chip:#f7f2e8; --chip-border:#253046; }
+      body.light { --bg:#ffffff; --fg:#0b0f14; --muted:#475569; --chip:#fff9ed; --chip-border:#e2e8f0; }
+      body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .app { display:grid; grid-template-columns:280px 1fr; grid-template-rows:auto 1fr; height:100vh; }
+      header { grid-column:1/-1; padding:10px 12px; border-bottom:1px solid var(--chip-border); display:flex; gap:12px; align-items:center; }
+      .sidebar { border-right:1px solid var(--chip-border); padding:10px; overflow:auto; }
+      .content { display:grid; grid-template-rows:auto auto 1fr; gap:8px; padding:10px; overflow:hidden; }
+      .shelf { background:var(--chip); color:#0b0f14; border:1px solid var(--chip-border); border-radius:12px; padding:8px; margin-bottom:8px; }
+      .shelf h4 { margin:0 0 6px 0; font-size:12px; letter-spacing:0.04em; color:#334155; }
+      .field { background:var(--chip); color:#0b0f14; border:1px solid var(--chip-border); border-radius:999px; padding:4px 8px; margin:4px 4px 0 0; display:inline-flex; gap:6px; align-items:center; cursor:pointer; }
+      .row { display:flex; flex-wrap:wrap; }
+      .viewer { height:100%; border:1px solid var(--chip-border); border-radius:12px; overflow:hidden; }
+      button, input, select { background:var(--chip); color:#0b0f14; border:1px solid var(--chip-border); border-radius:8px; padding:6px 8px; }
+      .muted { color:var(--muted); }
+      .kbd { border:1px solid var(--chip-border); background:var(--chip); color:#0b0f14; border-radius:6px; padding:2px 6px; font-size:12px; }
+    </style>
+    <script type="module" src="/src/main.tsx"></script>
+  </head>
+  <body class="light"><div id="root"></div></body>
+</html>

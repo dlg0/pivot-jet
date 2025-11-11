@@ -1,0 +1,5 @@
+declare module '@finos/perspective'
+declare module '@finos/perspective-viewer'
+declare module '@finos/perspective-viewer-d3fc'
+declare module '@finos/perspective-viewer-datagrid'
+declare module 'tinykeys'
