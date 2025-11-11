@@ -1,14 +1,17 @@
 import { describe, it, expect } from 'vitest'
-import wasmURL from '@finos/perspective/dist/wasm/perspective-js.wasm?url'
+import clientWasm from '@finos/perspective/dist/wasm/perspective-js.wasm?url'
+import serverWasm from '@finos/perspective/dist/wasm/perspective-server.wasm?url'
 
 describe.skip('Perspective worker initialization', () => {
-  // NOTE: This test correctly validates the worker initialization code,
-  // but Perspective requires <perspective-viewer> element to be registered
-  // for WASM initialization. This works in production but not in isolated tests.
-  // The missing await bug WAS caught by this test during development.
+  // NOTE: WASM initialization works, but Apache Arrow serialization format
+  // differs between test environment and production. Test kept for reference.
   it('creates worker and table without WASM loading errors', async () => {
-    const { worker } = await import('@finos/perspective')
-    const w = await worker({ wasm: wasmURL })  // ✅ Now with await!
+    const perspective = await import('@finos/perspective')
+    
+    perspective.default.init_client(fetch(clientWasm))
+    perspective.default.init_server(fetch(serverWasm))
+    
+    const w = await perspective.worker()
     
     const { tableFromArrays } = await import('apache-arrow')
     const arrowTable = tableFromArrays({
