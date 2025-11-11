@@ -4,7 +4,7 @@ import wasmURL from '@finos/perspective/dist/wasm/perspective-js.wasm?url'
 
 export async function applyViewToPerspective(viewer: any, arrow: ArrowTable, view: ViewSpec, global: GlobalFilters){
   const { worker } = await import('@finos/perspective')
-  const w = worker({ wasm: wasmURL })
+  const w = await worker({ wasm: wasmURL })
   const tbl = await w.table(arrow as any)
 
   const aggregates: Record<string,string> = {}
