@@ -3,10 +3,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    conditions: ['browser']
-  },
   optimizeDeps: {
+    include: ['chroma-js'],
     exclude: [
       '@finos/perspective',
       '@finos/perspective-viewer',
