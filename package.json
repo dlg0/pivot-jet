@@ -6,29 +6,47 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:browser": "vitest --browser.headless --browser.name=chromium"
   },
   "dependencies": {
+    "@duckdb/duckdb-wasm": "^1.28.0",
+    "@finos/perspective": "^3.8.0",
+    "@finos/perspective-viewer": "^3.8.0",
+    "@finos/perspective-viewer-d3fc": "^3.8.0",
+    "@finos/perspective-viewer-datagrid": "^3.8.0",
+    "apache-arrow": "^17.0.0",
+    "chroma-js": "2.4.2",
+    "dexie": "^4.0.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "zustand": "^4.5.2",
-    "dexie": "^4.0.8",
-    "@finos/perspective": "^2.10.2",
-    "@finos/perspective-viewer": "^2.10.2",
-    "@finos/perspective-viewer-d3fc": "^2.10.2",
-    "@finos/perspective-viewer-datagrid": "^2.10.2",
-    "apache-arrow": "^17.0.0",
-    "duckdb-wasm": "^1.28.0",
     "tinykeys": "^3.0.0",
     "vega": "^5.30.0",
+    "vega-embed": "^6.26.0",
     "vega-lite": "^5.20.0",
-    "vega-embed": "^6.26.0"
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/browser": "^4.0.8",
+    "@vitest/browser-playwright": "^4.0.8",
+    "d3-array": "^3.2.4",
+    "d3-path": "^3.1.0",
+    "d3-scale": "^4.0.2",
+    "d3-shape": "^3.2.0",
+    "playwright": "link:@vitest/browser/providers/playwright",
     "typescript": "^5.6.3",
     "vite": "^5.4.10",
-    "@vitejs/plugin-react": "^4.3.1",
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0"
+    "vitest": "^4.0.8"
+  },
+  "pnpm": {
+    "overrides": {
+      "chroma-js": "2.4.2"
+    }
   }
 }
