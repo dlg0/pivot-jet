@@ -4,6 +4,18 @@ import { playwright } from '@vitest/browser-playwright'
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    conditions: ['browser']
+  },
+  optimizeDeps: {
+    exclude: [
+      '@finos/perspective',
+      '@finos/perspective-viewer',
+      '@finos/perspective-viewer-d3fc',
+      '@finos/perspective-viewer-datagrid',
+    ],
+  },
+  assetsInclude: ['**/*.wasm'],
   test: {
     browser: {
       enabled: true,

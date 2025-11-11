@@ -2,8 +2,9 @@ import type { Table as ArrowTable } from 'apache-arrow'
 import type { ViewSpec, GlobalFilters } from '../state/store'
 
 export async function applyViewToPerspective(viewer: any, arrow: ArrowTable, view: ViewSpec, global: GlobalFilters){
-  const worker = (window as any).perspective?.worker?.() ?? (await import('@finos/perspective')).worker()
-  const tbl = await worker.table(arrow as any)
+  const { worker } = await import('@finos/perspective')
+  const w = worker()
+  const tbl = await w.table(arrow as any)
 
   const aggregates: Record<string,string> = {}
   view.shelves.values.forEach(v => { aggregates[v.field] = v.agg })
