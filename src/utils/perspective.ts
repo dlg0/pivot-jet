@@ -1,10 +1,21 @@
 import type { Table as ArrowTable } from 'apache-arrow'
 import type { ViewSpec, GlobalFilters } from '../state/store'
-import wasmURL from '@finos/perspective/dist/wasm/perspective-js.wasm?url'
+import clientWasm from '@finos/perspective/dist/wasm/perspective-js.wasm?url'
+import serverWasm from '@finos/perspective/dist/wasm/perspective-server.wasm?url'
+
+let perspectiveInitialized = false
 
 export async function applyViewToPerspective(viewer: any, arrow: ArrowTable, view: ViewSpec, global: GlobalFilters){
-  const { worker } = await import('@finos/perspective')
-  const w = await worker({ wasm: wasmURL })
+  const perspective = await import('@finos/perspective')
+  
+  // Initialize both client and server WASM if not already done
+  if (!perspectiveInitialized) {
+    perspective.default.init_client(fetch(clientWasm))
+    perspective.default.init_server(fetch(serverWasm))
+    perspectiveInitialized = true
+  }
+  
+  const w = await perspective.worker()
   const tbl = await w.table(arrow as any)
 
   const aggregates: Record<string,string> = {}
