@@ -1,9 +1,10 @@
 import type { Table as ArrowTable } from 'apache-arrow'
 import type { ViewSpec, GlobalFilters } from '../state/store'
+import wasmURL from '@finos/perspective/dist/wasm/perspective-js.wasm?url'
 
 export async function applyViewToPerspective(viewer: any, arrow: ArrowTable, view: ViewSpec, global: GlobalFilters){
   const { worker } = await import('@finos/perspective')
-  const w = worker()
+  const w = worker({ wasm: wasmURL })
   const tbl = await w.table(arrow as any)
 
   const aggregates: Record<string,string> = {}

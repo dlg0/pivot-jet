@@ -4,16 +4,16 @@ import { playwright } from '@vitest/browser-playwright'
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    conditions: ['browser']
-  },
   optimizeDeps: {
+    include: ['chroma-js'],
     exclude: [
       '@finos/perspective',
-      '@finos/perspective-viewer',
-      '@finos/perspective-viewer-d3fc',
-      '@finos/perspective-viewer-datagrid',
+      '@finos/perspective-viewer'
     ],
+    esbuildOptions: {
+      target: 'esnext',
+      external: ['@finos/perspective', '@finos/perspective-viewer']
+    }
   },
   assetsInclude: ['**/*.wasm'],
   test: {
