@@ -1,4 +1,5 @@
 import type { Table as ArrowTable } from 'apache-arrow'
+import { tableToIPC } from 'apache-arrow'
 import type { ViewSpec, GlobalFilters } from '../state/store'
 import clientWasm from '@finos/perspective/dist/wasm/perspective-js.wasm?url'
 import serverWasm from '@finos/perspective/dist/wasm/perspective-server.wasm?url'
@@ -8,7 +9,6 @@ let perspectiveInitialized = false
 export async function applyViewToPerspective(viewer: any, arrow: ArrowTable, view: ViewSpec, global: GlobalFilters){
   const perspective = await import('@finos/perspective')
   
-  // Initialize both client and server WASM if not already done
   if (!perspectiveInitialized) {
     perspective.default.init_client(fetch(clientWasm))
     perspective.default.init_server(fetch(serverWasm))
@@ -16,7 +16,9 @@ export async function applyViewToPerspective(viewer: any, arrow: ArrowTable, vie
   }
   
   const w = await perspective.worker()
-  const tbl = await w.table(arrow as any)
+  
+  const arrowIPC = tableToIPC(arrow)
+  const tbl = await w.table(arrowIPC)
 
   const aggregates: Record<string,string> = {}
   view.shelves.values.forEach(v => { aggregates[v.field] = v.agg })
